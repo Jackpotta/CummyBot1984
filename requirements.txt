@@ -1,0 +1,7 @@
+praw
+asyncpraw
+config
+ntlk
+better_profanity
+pandas
+discord

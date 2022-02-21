@@ -64,7 +64,7 @@ def streaming():
 		op = submission.author
 	if len(body) <= 1:  # Use title as comment if the post does not have body.
 		replytext = title
-	elif len(body) > 9900
+	elif len(body) > 9900:
 		replytext = body[:9899]  # Implements a maximum length of text
 		try:
 			if comment(op,replytext):
