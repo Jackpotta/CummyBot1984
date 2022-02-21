@@ -8,6 +8,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import nltk
 import pandas as pd
 
+from credentials import credentials
+
 nltk.download('vader_lexicon')
 # import logging
 
@@ -18,12 +20,14 @@ nltk.download('vader_lexicon')
 #     logger.setLevel(logging.DEBUG)
 #     logger.addHandler(handler)
 
+CREDS = credentials()
+
 print("Logging in...")
-reddit = praw.Reddit(username = username,
-			password = password,
-			client_id = client_id,
-			client_secret = client_secret,
-			user_agent = user_agent)
+reddit = praw.Reddit(username = CREDS['username'],
+			password = CREDS['password'],
+			client_id = CREDS['client_id'],
+			client_secret = CREDS['client_secret'],
+			user_agent = CREDS['user_agent'])
 print("Logged in!")
 
 def logging(op,replytext): #log timestamp

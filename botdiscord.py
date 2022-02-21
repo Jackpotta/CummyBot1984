@@ -9,6 +9,8 @@ from badwords import badwords
 from config import *
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
+from credentials import credentials
+
 nltk.download('vader_lexicon')
 # import nest_asyncio
 # nest_asyncio.apply()
@@ -23,15 +25,18 @@ nltk.download('vader_lexicon')
 #     logger.setLevel(logging.DEBUG)
 #     logger.addHandler(handler)
 
+CREDS = credentials()
+
 client = discord.Client()
 
 print("Logging in Reddit...")
-reddit = praw.Reddit(username=username,
-                     password=password,
-                     client_id=client_id,
-                     client_secret=client_secret,
-                     user_agent=user_agent,
-                     check_for_async=False)
+
+reddit = praw.Reddit(username = CREDS['username'],
+			password = CREDS['password'],
+			client_id = CREDS['client_id'],
+			client_secret = CREDS['client_secret'],
+			user_agent = CREDS['user_agent'],
+            check_for_async=False)
 print("Logged in Reddit!")
 
 
@@ -62,7 +67,7 @@ def reply(replytext):
 @client.event
 async def on_message(message):
     subreddit = reddit.subreddit("copypasta")
-    channel = client.get_channel(channelid)
+    channel = client.get_channel(CREDS['channelid'])
     for submission in subreddit.stream.submissions(skip_existing=True):
         title = submission.title
         body = submission.selftext
@@ -90,4 +95,4 @@ async def on_message(message):
 
 
 if __name__ == "__main__":
-    client.run(discordtoken)
+    client.run(CREDS['discordtoken'])
