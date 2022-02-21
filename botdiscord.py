@@ -7,6 +7,7 @@ import discord
 import os
 from badwords import badwords
 from config import *
+import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
 from credentials import credentials
